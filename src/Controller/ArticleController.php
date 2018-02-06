@@ -16,7 +16,11 @@
      * @Route("/news/{slug}");
      */
     public function show($slug){
-      return new Response(sprintf("Future page to show one space article:%s",$slug));
+      return new Response(
+        sprintf(
+          "Future page to show one space article:%s",$slug
+        )
+      );
     }
   }
 ?>
