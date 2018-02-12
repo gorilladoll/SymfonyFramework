@@ -113,7 +113,7 @@ Twig를 이용한 뷰 만들기
 	 - 메인 탬플릿의 구성 요소를 서브 프레임을 이용 하는 법
 		 - {% extends ‘메인 템플릿.html.twig’ %}
 		 - {% block title %} 	타이틀 명 	{% endblock %}
-	 =====================================
+ =====================================
 
 디버깅
 
@@ -126,6 +126,41 @@ dump를 이용한 디버그
 
 	 - view를 이용한 dump 사용
 		- {{ dump() }}  
+
+===============================
+Symfony 디버깅 및 팩
+
+디버깅 도구 설치
+ - composer require debug --dev
+ - 디버깅 도구는 기본적으로 6개의 라이브러리로 이루어 진다.
+ - composer.json 파일을 보면 “Symfony/debug-pack”으로 하나로 통합 된 것을 확인 할 수 있다.
+
+디버깅 도구 분리하기
+ - composer unpack debug
+ - 이는 디버그 package를 제거하는 것 처럼 보인다.
+ - 사실 이는 디버그의 통합 팩을 제거하고 6개의 라이브러리로 분리시켜주는 효과를 가져다 준다.
+ - 디버그 통합 팩이 필요 없고 개별로 하나하나만 필요할 때 사용하면 좋다.
+
+===============================
+
+CSS 및 자바스크립트
+
+Symfony에서 파일을 복붙 하는 경우 우선적으로 해야 할 것
+ - rm -rf var/cache/dev/*
+ - 이 것을 해야하는 이유는 twig 업데이트 순서가 꼬였기 때문에 재정렬할 필요가 있기 때문
+
+Symfony에서 사용하는 모든 주소들의 위치
+ - public 을 기준으로 주소를 결정한다.
+ - 예) <link rel="stylesheet" href="/css/font-awesome.css">
+
+모든 주소들을 사용할 때 주의해야 하는 점
+ - asset()을 이용하여 주소를 묶어 주는 것이 좋다.
+ - 예) <link rel="stylesheet" href="{{ asset('/css/font-awesome.css') }}">
+ - asset을 사용하는 이유
+	 - CDN으로 저장하거나 자산을 시각화 할 수 있다.
+ - asset() 함수를 이용하기 위해서는 사전에 설치를 해 주어야 한다.
+	 - composer require asset
+
 
 
 
